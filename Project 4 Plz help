@@ -86,6 +86,17 @@ public class Maze {
 import java.io.*;
 import java.util.*;
 
+/**
+ * Project 4 -- Maze Solver
+ *
+ * This program runs through a maze made of a 2D array.
+ *
+ * @author Luke Troutman, CS 180 week 11
+ *
+ * @version Nov 24, 2024
+ *
+ */
+
 public class MazeSolver {
     private Maze maze;
 
