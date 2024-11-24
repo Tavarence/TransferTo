@@ -1,3 +1,88 @@
+public class InvalidMazeException extends Exception {
+    public InvalidMazeException() {
+        super();
+    }
+    
+    public InvalidMazeException(String message) {
+        super(message);
+    }
+}
+
+----------------
+
+public class Maze {
+    private final int[] end; //Field for the end square of this Maze.
+    private final char[][] grid; //Field for the char grid representation of this Maze.
+    private final String name; //Field for the Maze's name
+    private int[][] path; //Field for the array of moves required to solve this Maze.
+    private final int[] start; //Field for the start square of this Maze.
+    
+    public Maze(String name, char[][] grid, int[] start, int[] end) {
+        this.name = name;
+        this.grid = grid;
+        this.start = start;
+        this.end = end;
+        this.path = null;
+    }
+    
+    public int[] getEnd() {
+        return end;
+    }
+    
+    public char[][] getGrid() {
+        return grid;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public int[] getStart() {
+        return end;
+    }
+    
+    public String pathString() {
+        String currentPath = "";
+        for (int pathway[]:path) {
+            currentPath += pathway[0] + "-" + pathway[1] + "\n";
+        }
+        return String.format("%s\nMoves: %d\n%s", name, path.length, currentPath);
+        //This method returns the String representing the Maze solution.
+        //The first line should be the Maze name.
+        //The second line should be "Moves: " followed by the number of moves.
+    }
+    
+    public void setPath(int[][] path) {
+        if (path[0][0] == start[0] && path[0][1] == start[1] && path[path.length][0] == end[0] && path[path.length][1] == end[1] && path.length == this.path.length) {
+            this.path = path;
+        }
+        //Sets the path of this Maze to the given path.
+        //The array should contain moves in order for example the first move would be the start square.
+        //If start were 6-0 then path[0][0] = row = 6 and path[0][1] = column = 0.
+        //The second move would then be stored in path[1][0] = row and path[1][1] = column
+        //The length of path should be equal to the number of moves required to exit the maze.
+        //The start and end squares should always be the first and last moves in this array.
+    }
+    
+    public String toString() {
+        
+        String currentMaze = "";
+        for (char[] tiles: grid) {
+            for (char tile: tiles) {
+                currentMaze += tile;
+            }
+            currentMaze += "\n";
+        }
+        return String.format("%s\nStart: %d-%d\nEnd: %d-%d\n%s", name, start[0], start[1], end[0], end[1], currentMaze);
+        //Returns the String representation of this Maze.
+        //The format is the same as the input file format.
+        //The first line is the name of the maze.
+        //The second line is "Start: " followed by the row-col of the start square.
+    }
+}
+
+-------------
+
 import java.io.*;
 import java.lang.*;
 public class MazeSolver {
