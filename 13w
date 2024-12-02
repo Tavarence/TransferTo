@@ -1,0 +1,38 @@
+public class UserLinkedList implements WalkThroughUserLinkedListInterface {
+    private UserNode headNode;
+
+    public UserLinkedList () {
+         this.headNode = null;
+    }
+     
+    public boolean addUserNode(String name) {
+        UserNode unNew = new UserNode(name);
+        UserNode unCur = headNode;
+        UserNode unLat = headNode;
+        
+        if (headNode == null) {
+            headNode = unNew;
+            return true;
+        }
+        while ((unCur = unCur.getNextNode()) != null) {
+            if (name == unCur.getName()) {
+                return false;
+            }
+            unLat = unCur;
+		}
+        unLat.setNextNode(unNew);
+        
+        return true;
+    }
+    
+    public void printUserList() {
+        if (headNode == null) {
+        	System.out.println("List is null!");
+	    } else {
+            UserNode un = headNode;
+		    do {
+			    System.out.println(un.getName());
+		    } while ((un = un.getNextNode()) != null);
+        }
+    }
+}
